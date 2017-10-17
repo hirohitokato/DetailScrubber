@@ -29,29 +29,21 @@ import UIKit
      if returns nil, then use the above default value.
      - returns: the array of dictionary `[CGFloat: Float]`.
      */
-    func scrubbingSpeedsOfDetailScrubber(_ scrubber: DetailScrubber) -> [CGFloat:Float]?
+    @objc optional func scrubbingSpeedsOfDetailScrubber(_ scrubber: DetailScrubber) -> [CGFloat:Float]?
 
     /**
      (Optional)
      Tells the delegate that the current scrubbing speed has been changed.
      */
-    func scrubber(_ scrubber: DetailScrubber,
+    @objc optional func scrubber(_ scrubber: DetailScrubber,
                   didChangeScrubbingSpeed speed: Float, yoffset: CGFloat)
 
     /**
      (Optional)
      Tells the delegate that the slider has detected a long press gesture.
      */
-    func scrubber(_ scrubber: DetailScrubber, didDetectLongPress inLongPressing: Bool)
-}
-
-public extension DetailScrubberDelegate {
-    func scrubbingSpeedsOfDetailScrubber(_ scrubber: DetailScrubber) -> [CGFloat:Float]? {
-        return nil
-    }
-    func scrubber(_ scrubber: DetailScrubber,
-                  didChangeScrubbingSpeed speed: Float, yoffset: CGFloat) {}
-    func scrubber(_ scrubber: DetailScrubber, didDetectLongPress inLongPressing: Bool) {}
+    @objc optional func scrubber(_ scrubber: DetailScrubber,
+                                 didDetectLongPress inLongPressing: Bool)
 }
 
 // MARK: -
@@ -120,9 +112,9 @@ open class DetailScrubber: UISlider {
         didSet {
             if _scrubbingSpeed.yoffset != oldValue.yoffset {
                 // announce a change.
-                delegate?.scrubber(self,
-                                   didChangeScrubbingSpeed: _scrubbingSpeed.speed,
-                                   yoffset: _scrubbingSpeed.yoffset)
+                delegate?.scrubber?(self,
+                                    didChangeScrubbingSpeed: _scrubbingSpeed.speed,
+                                    yoffset: _scrubbingSpeed.yoffset)
             }
         }
     }
@@ -152,7 +144,7 @@ open class DetailScrubber: UISlider {
         didSet {
             if (oldValue != _longPressed) {
                 // notify the event
-                delegate?.scrubber(self, didDetectLongPress: _longPressed)
+                delegate?.scrubber?(self, didDetectLongPress: _longPressed)
             }
         }
     }
@@ -167,7 +159,7 @@ extension TrackingTouches {
         let beginTracking = super.beginTracking(touch, with: event)
         if beginTracking {
             // query the default speeds to its delegate
-            if let speeds = delegate?.scrubbingSpeedsOfDetailScrubber(self) {
+            if let speeds = delegate?.scrubbingSpeedsOfDetailScrubber?(self) {
                 scrubbingSpeeds = speeds
             }
             
