@@ -12,6 +12,7 @@
 		1A3326D11F95E1A30068E828 /* DetailScrubber.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3326C31F95E1A30068E828 /* DetailScrubber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A3326DB1F95E4800068E828 /* DetailScrubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326DA1F95E4800068E828 /* DetailScrubber.swift */; };
 		1A3326DE1F95E9E60068E828 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1A3326DC1F95E9E00068E828 /* LICENSE */; };
+		9104F7061F96469A002A304A /* MovieSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9104F7041F964616002A304A /* MovieSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		1A3326DA1F95E4800068E828 /* DetailScrubber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScrubber.swift; sourceTree = "<group>"; };
 		1A3326DC1F95E9E00068E828 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1A3326DD1F95E9E00068E828 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9104F7041F964616002A304A /* MovieSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3326DA1F95E4800068E828 /* DetailScrubber.swift */,
+				9104F7041F964616002A304A /* MovieSlider.swift */,
 				1A3326C31F95E1A30068E828 /* DetailScrubber.h */,
 				1A3326C41F95E1A30068E828 /* Info.plist */,
 			);
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A3326DB1F95E4800068E828 /* DetailScrubber.swift in Sources */,
+				9104F7061F96469A002A304A /* MovieSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
