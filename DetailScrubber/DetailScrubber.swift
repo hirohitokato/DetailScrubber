@@ -60,7 +60,7 @@ open class DetailScrubber: UISlider {
     /**
      The delegate of scrubber object, confoms to `DetailScrubberDelegate` protocol.
      */
-    var delegate:DetailScrubberDelegate?
+    public var delegate:DetailScrubberDelegate?
     
     /**
      Holds the scrubbing speeds as value for the Y-Offsets as keys.
@@ -72,7 +72,7 @@ open class DetailScrubber: UISlider {
          150.0  : 0.1]           // 150-  *pt ⇒  10%
      ```
      */
-    var scrubbingSpeeds: [CGFloat:Float] =
+    public var scrubbingSpeeds: [CGFloat:Float] =
         [0.0:1.0, 50.0:0.5, 100.0:0.25, 150.0:0.1] {
         didSet {
             if scrubbingSpeeds[0.0] != 1.0 {
@@ -85,7 +85,7 @@ open class DetailScrubber: UISlider {
      Current scrubbing speed. If `UIControl`'s `tracking` is `NO`,
      the return value will be `1.0`
      */
-    var currentSpeed: Float {
+    public var currentSpeed: Float {
         get { return _scrubbingSpeed.speed }
     }
     
