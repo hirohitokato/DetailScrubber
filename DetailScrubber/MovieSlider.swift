@@ -30,7 +30,7 @@ open class MovieSlider : DetailScrubber {
     private let kNumStacks = 30
     private let kFrameGap: CGFloat = 2
     private var kFrameHeight: CGFloat {
-        return minimumTrackImage(for: UIControlState())!.size.height
+        return minimumTrackImage(for: UIControl.State())!.size.height
     }
 
 
@@ -82,12 +82,12 @@ private extension MovieSlider_Appearance {
         tintColor = UIColor.white
         
         // thumb image
-        setThumbImage(_imageForThumb(), for: UIControlState())
+        setThumbImage(_imageForThumb(), for: UIControl.State())
         
         // track image
         let tracks = _imagesForTrack()
-        setMinimumTrackImage(tracks.minImage, for: UIControlState())
-        setMaximumTrackImage(tracks.maxImage, for: UIControlState())
+        setMinimumTrackImage(tracks.minImage, for: UIControl.State())
+        setMaximumTrackImage(tracks.maxImage, for: UIControl.State())
     }
     
     func _imageForThumb() -> UIImage? {
@@ -231,7 +231,7 @@ extension MovieSlider_StackingMode {
             _stacks.append(v)
         }
 
-        let thumbImage = self.thumbImage(for: UIControlState())
+        let thumbImage = self.thumbImage(for: UIControl.State())
         let minTrackIndex = subviews.index { v -> Bool in
             if let imageView = v as? UIImageView {
                 return imageView.image == thumbImage
@@ -304,7 +304,7 @@ extension MovieSlider_StackingMode {
         updateStack()
     }
 
-    open override func sendActions(for controlEvents: UIControlEvents) {
+    open override func sendActions(for controlEvents: UIControl.Event) {
         if !stackMode {
             super.sendActions(for: controlEvents)
         }

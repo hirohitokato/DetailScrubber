@@ -7,7 +7,7 @@ DetailScrubber is a UISlider subclass with variable scrubbing speeds. It is stro
 
 ## Requirements
 
-- Deployment Target: iOS 8.4 or higher
+- Deployment Target: iOS 11.4 or higher
 - Foundation, UIKit and CoreGraphics frameworks
 
 ## Setup

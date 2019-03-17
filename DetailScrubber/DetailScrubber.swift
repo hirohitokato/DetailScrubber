@@ -182,7 +182,7 @@ extension TrackingTouches {
         let prevLocation = touch.previousLocation(in: self)
         let currentLocation = touch.location(in: self)
         let trackingOffset = currentLocation.x - prevLocation.x
-        let vertOffset = fabs(currentLocation.y - _beganTrackingLocation.y)
+        let vertOffset = abs(currentLocation.y - _beganTrackingLocation.y)
         
         _scrubbingSpeed = _lowerScrubbingSpeed(scrubbingSpeeds, offset: vertOffset)
         
@@ -196,7 +196,7 @@ extension TrackingTouches {
         if (_beganTrackingLocation.y < currentLocation.y && currentLocation.y < prevLocation.y) ||
             (_beganTrackingLocation.y > currentLocation.y && currentLocation.y > prevLocation.y) {
             thumbAdjustment = (_realPositionValue - value)
-                / Float(1 + fabs(currentLocation.y - _beganTrackingLocation.y))
+                / Float(1 + abs(currentLocation.y - _beganTrackingLocation.y))
         } else {
             thumbAdjustment = 0.0
         }
