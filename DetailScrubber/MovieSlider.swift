@@ -27,18 +27,11 @@ open class MovieSlider : DetailScrubber {
     private let kThumbImageMargin : CGFloat = 10.0
     private let kThumbSize : CGFloat = 15.0
     private let kTrackHeight : CGFloat = 3.0
-    private let kNumStacks = 30
     private let kFrameGap: CGFloat = 2
     private var kFrameHeight: CGFloat {
         return minimumTrackImage(for: UIControl.State())!.size.height
     }
 
-
-    public enum TrackPosition {
-        case minimumSide, maximumSide
-    }
-
-    var _stacks = [UIView]()
     public var stackMode: Bool = false {
         didSet {
             if stackMode != oldValue {
@@ -53,8 +46,19 @@ open class MovieSlider : DetailScrubber {
             }
         }
     }
-    var _index: Int = 0
-    var _value: Float = 0.0
+    private var _stacks = [UIView]()
+    private var _index: Int = 0
+    private var _value: Float = 0.0
+
+    public var numberOfStacks = 30 {
+        didSet {
+            guard stackMode == false else {
+                print("Cannot change number of stacks during stack mode.")
+                numberOfStacks = oldValue
+                return
+            }
+        }
+    }
 
     public var movieSliderDelegate: MovieSliderDelegate? = nil
 
@@ -223,7 +227,7 @@ extension MovieSlider_StackingMode {
             return
         }
 
-        for _ in 0...kNumStacks-1 {
+        (0..<numberOfStacks).forEach { _ in
             let v = UIView(frame: CGRect.zero)
             v.backgroundColor = UIColor.black
             v.layer.borderWidth = 0.5
@@ -245,7 +249,7 @@ extension MovieSlider_StackingMode {
 
         var x: CGFloat = thumbRect.midX
         let y: CGFloat = (frame.height-kFrameHeight)/2
-        let width: CGFloat = (frame.width - kFrameGap*(CGFloat(kNumStacks-1))) / CGFloat(kNumStacks)
+        let width: CGFloat = (frame.width - kFrameGap*(CGFloat(numberOfStacks-1))) / CGFloat(numberOfStacks)
         let height: CGFloat = kFrameHeight
 
         _stacks.forEach{
@@ -267,8 +271,8 @@ extension MovieSlider_StackingMode {
 
     open var currentIndex: Int {
         let valueRange = maximumValue - minimumValue
-        let range = Int(((value - minimumValue)/valueRange) * Float(kNumStacks))
-        let currentIndex = min(range, kNumStacks-1)
+        let range = Int(((value - minimumValue)/valueRange) * Float(numberOfStacks))
+        let currentIndex = min(range, numberOfStacks-1)
         return currentIndex
     }
 
