@@ -83,7 +83,6 @@ open class DetailScrubber: UISlider {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setupLongPressGesture()
     }
     
     required public init?(coder decoder: NSCoder) {
@@ -92,8 +91,6 @@ open class DetailScrubber: UISlider {
         if let speeds: AnyObject = decoder.decodeObject(forKey: "scrubbingSpeeds") as AnyObject? {
             scrubbingSpeeds = speeds as! [CGFloat : Float]
         }
-        
-        setupLongPressGesture()
     }
     
     open override func encode(with encoder: NSCoder) {
@@ -148,6 +145,7 @@ open class DetailScrubber: UISlider {
             }
         }
     }
+    private var _longPressedEventOccurred = false
 }
 
 // MARK: - Touch handling
@@ -169,6 +167,7 @@ extension TrackingTouches {
                                              y: thumbRect.origin.y + thumbRect.size.height / 2.0)
             _realPositionValue = value
             
+            setupLongPressGesture()
             startLongPressing(touch)
         }
         return beginTracking
@@ -228,6 +227,7 @@ extension TrackingTouches {
 private typealias LongPressGesture = DetailScrubber
 private extension LongPressGesture {
     func setupLongPressGesture() {
+        _longPressedEventOccurred = false
     }
     func startLongPressing(_ touch: UITouch) {
         _longPressed = false
@@ -260,6 +260,10 @@ private extension LongPressGesture {
     }
     
     @objc func longPressed(_ timer: Timer) {
+        guard _longPressedEventOccurred == false else {
+            return
+        }
+        _longPressedEventOccurred = true
         _longPressed = true
     }
 }
