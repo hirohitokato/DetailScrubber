@@ -52,7 +52,7 @@ open class DetailScrubber: UISlider {
     /**
      The delegate of scrubber object, confoms to `DetailScrubberDelegate` protocol.
      */
-    public var delegate:DetailScrubberDelegate?
+    public weak var delegate:DetailScrubberDelegate?
     
     /**
      Holds the scrubbing speeds as value for the Y-Offsets as keys.

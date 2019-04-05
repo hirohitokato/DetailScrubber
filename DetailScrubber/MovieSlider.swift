@@ -60,7 +60,7 @@ open class MovieSlider : DetailScrubber {
         }
     }
 
-    public var movieSliderDelegate: MovieSliderDelegate? = nil
+    public weak var movieSliderDelegate: MovieSliderDelegate? = nil
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
