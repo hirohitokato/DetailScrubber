@@ -7,6 +7,25 @@
 import UIKit
 import QuartzCore
 
+public enum StackState {
+    case inactive
+    case active(Bool)
+
+    var stackColor: UIColor {
+        switch self {
+        case .inactive:
+            return .black
+        case .active(let isOn):
+            return isOn ? .white : .gray
+        }
+    }
+}
+
+private struct Stack {
+    let view: UIView
+    var state: StackState
+}
+
 @objc public protocol MovieSliderDelegate {
     /**
     Called whenever the slider's current stack changes.
@@ -46,7 +65,7 @@ open class MovieSlider : DetailScrubber {
             }
         }
     }
-    private var _stacks = [UIView]()
+    private var _stacks = [Stack]()
     private var _index: Int = 0
     private var _value: Float = 0.0
 
@@ -218,7 +237,7 @@ extension MovieSlider_StackingMode {
 
     fileprivate func showStacks(_ isOn: Bool) {
         if !isOn {
-            _stacks.forEach{ $0.removeFromSuperview() }
+            _stacks.forEach{ $0.view.removeFromSuperview() }
             _stacks.removeAll()
             UIView.animate(withDuration: 0.15, animations: {
                 self.subviews[0].alpha = 1.0
@@ -228,11 +247,13 @@ extension MovieSlider_StackingMode {
         }
 
         (0..<numberOfStacks).forEach { _ in
+            let state = StackState.inactive
             let v = UIView(frame: CGRect.zero)
-            v.backgroundColor = UIColor.black
+            v.backgroundColor = state.stackColor
             v.layer.borderWidth = 0.5
             v.layer.borderColor = UIColor.darkGray.cgColor
-            _stacks.append(v)
+            let stack = Stack(view: v, state: state)
+            _stacks.append(stack)
         }
 
         let thumbImage = self.thumbImage(for: UIControl.State())
@@ -253,8 +274,8 @@ extension MovieSlider_StackingMode {
         let height: CGFloat = kFrameHeight
 
         _stacks.forEach{
-            insertSubview($0, at: minTrackIndex!)
-            $0.frame = CGRect(x: x, y: y, width: width, height: height)
+            insertSubview($0.view, at: minTrackIndex!)
+            $0.view.frame = CGRect(x: x, y: y, width: width, height: height)
         }
 
         x = 0.0
@@ -262,7 +283,7 @@ extension MovieSlider_StackingMode {
             self.subviews[0].alpha = 0.0
             self.subviews[1].alpha = 0.0
             self._stacks.forEach {
-                $0.frame = CGRect(x: x, y: y, width: width, height: height)
+                $0.view.frame = CGRect(x: x, y: y, width: width, height: height)
                 x += width + self.kFrameGap
             }
         }) 
@@ -286,12 +307,21 @@ extension MovieSlider_StackingMode {
         }
     }
 
+    open func setStackState(_ state: StackState, at index: Int) {
+        guard index >= 0 && index < numberOfStacks else {
+            print("invalid index\(index) is set")
+            return
+        }
+        _stacks[index].state = state
+        updateStack()
+    }
+
     fileprivate func updateStack() {
         if stackMode {
-            for v in _stacks {
-                v.backgroundColor = UIColor.black
+            _stacks[currentIndex].state = .active(true)
+            for stack in _stacks {
+                stack.view.backgroundColor = stack.state.stackColor
             }
-            _stacks[currentIndex].backgroundColor = UIColor.white
         }
     }
 
