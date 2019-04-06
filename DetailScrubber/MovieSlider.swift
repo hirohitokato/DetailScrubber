@@ -9,14 +9,12 @@ import QuartzCore
 
 public enum StackState {
     case inactive
-    case active(Bool)
+    case active
 
     var stackColor: UIColor {
         switch self {
-        case .inactive:
-            return .black
-        case .active(let isOn):
-            return isOn ? .white : .gray
+        case .inactive: return .black
+        case .active: return .darkGray
         }
     }
 }
@@ -251,7 +249,7 @@ extension MovieSlider_StackingMode {
             let v = UIView(frame: CGRect.zero)
             v.backgroundColor = state.stackColor
             v.layer.borderWidth = 0.5
-            v.layer.borderColor = UIColor.darkGray.cgColor
+            v.layer.borderColor = UIColor.lightGray.cgColor
             let stack = Stack(view: v, state: state)
             _stacks.append(stack)
         }
@@ -318,9 +316,9 @@ extension MovieSlider_StackingMode {
 
     fileprivate func updateStack() {
         if stackMode {
-            _stacks[currentIndex].state = .active(true)
-            for stack in _stacks {
-                stack.view.backgroundColor = stack.state.stackColor
+            for (i, stack) in _stacks.enumerated() {
+                stack.view.backgroundColor =
+                    (i == currentIndex) ? .white : stack.state.stackColor
             }
         }
     }
