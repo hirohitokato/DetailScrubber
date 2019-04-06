@@ -270,10 +270,20 @@ extension MovieSlider_StackingMode {
     }
 
     open var currentIndex: Int {
-        let valueRange = maximumValue - minimumValue
-        let range = Int(((value - minimumValue)/valueRange) * Float(numberOfStacks))
-        let currentIndex = min(range, numberOfStacks-1)
-        return currentIndex
+        get {
+            guard stackMode == true else { return -1 }
+
+            let valueRange = maximumValue - minimumValue
+            let range = Int(((value - minimumValue)/valueRange) * Float(numberOfStacks))
+            let currentIndex = min(range, numberOfStacks-1)
+            return currentIndex
+        }
+        set {
+            guard stackMode == true else { return }
+
+            let valueRange = maximumValue - minimumValue
+            value = (valueRange / Float(numberOfStacks * 2)) * (Float(newValue) * 2 + 1) + minimumValue
+        }
     }
 
     fileprivate func updateStack() {
