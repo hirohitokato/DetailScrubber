@@ -255,7 +255,7 @@ extension MovieSlider_StackingMode {
         }
 
         let thumbImage = self.thumbImage(for: UIControl.State())
-        let minTrackIndex = subviews.index { v -> Bool in
+        let minTrackIndex = subviews.firstIndex { v -> Bool in
             if let imageView = v as? UIImageView {
                 return imageView.image == thumbImage
             } else {

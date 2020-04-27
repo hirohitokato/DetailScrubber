@@ -159,12 +159,12 @@
 				TargetAttributes = {
 					1A3326BF1F95E1A30068E828 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
 					1A3326C81F95E1A30068E828 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -175,6 +175,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1A3326B61F95E1A30068E828;
 			productRefGroup = 1A3326C11F95E1A30068E828 /* Products */;
@@ -370,7 +371,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -393,7 +394,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.DetailScrubber;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -408,7 +409,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.DetailScrubberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -423,7 +424,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.DetailScrubberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
